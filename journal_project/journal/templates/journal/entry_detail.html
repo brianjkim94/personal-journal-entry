@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html>
+<head><title>{{ entry.title }}</title></head>
+<body>
+    <h1>{{ entry.title }}</h1>
+    <p>{{ entry.content }}</p>
+    <a href="{% url 'entry_edit' entry.pk %}">Edit</a>
+    <a href="{% url 'entry_delete' entry.pk %}">Delete</a>
+    <a href="{% url 'entry_list' %}">Back to List</a>
+</body>
+</html>

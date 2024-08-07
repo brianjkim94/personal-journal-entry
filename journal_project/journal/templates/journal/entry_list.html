@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head><title>Journal Entries</title></head>
+<body>
+    <h1>Journal Entries</h1>
+    <form method="get" action="{% url 'search_by_date' %}">
+        <input type="date" name="date" placeholder="MM/DD/YYYY">
+        <button type="submit">Search</button>
+    </form>
+    <a href="{% url 'entry_create' %}">Add New Entry</a>
+    <ul>
+        {% for entry in entries %}
+            <li><a href="{% url 'entry_detail' entry.pk %}">{{ entry.title }}</a></li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
