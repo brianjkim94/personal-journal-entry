@@ -9,11 +9,3 @@ class JournalEntryForm(forms.ModelForm):
             'date': forms.DateInput(attrs={'type': 'date'}),
             'tags': forms.CheckboxSelectMultiple(),
         }
-
-class DateForm(forms.ModelForm):
-    class Meta:
-        model = Date
-        fields = ['date']
-        widgets = {
-            'date': forms.DateInput(attrs={'type': 'date'}),
-        }
