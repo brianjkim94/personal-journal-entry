@@ -2,10 +2,14 @@
 <html>
 <head><title>Journal Entries</title></head>
 <body>
-    <h1>Journal Entries</h1>
+    <h1>Digital Journal</h1>
     <form method="get" action="{% url 'search_by_date' %}">
         <input type="date" name="date" placeholder="MM/DD/YYYY">
-        <button type="submit">Search</button>
+        <button type="submit">Search by Date</button>
+    </form>
+    <form method="get" action="{% url 'search_by_tag' %}">
+        <input type="text" name="tag" placeholder="Tag">
+        <button type="submit">Search by Tag</button>
     </form>
     <a href="{% url 'entry_create' %}">Add New Entry</a>
     <ul>

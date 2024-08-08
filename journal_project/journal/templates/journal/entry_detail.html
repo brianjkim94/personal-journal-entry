@@ -1,11 +1,24 @@
 <!DOCTYPE html>
 <html>
-<head><title>{{ entry.title }}</title></head>
+<head><title>Journal Entry Detail</title></head>
 <body>
     <h1>{{ entry.title }}</h1>
+    <p><strong>Date:</strong> {{ entry.date }}</p>
     <p>{{ entry.content }}</p>
+    <p><strong>Tags:</strong> 
+        {% if entry.tags.all %}
+            {% for tag in entry.tags.all %}
+                {{ tag.name }}{% if not forloop.last %}, {% endif %}
+            {% endfor %}
+        {% else %}
+            No tags
+        {% endif %}
+    </p>
     <a href="{% url 'entry_edit' entry.pk %}">Edit</a>
-    <a href="{% url 'entry_delete' entry.pk %}">Delete</a>
+    <form method="post" action="{% url 'entry_delete' entry.pk %}">
+        {% csrf_token %}
+        <button type="submit">Delete</button>
+    </form>
     <a href="{% url 'entry_list' %}">Back to List</a>
 </body>
 </html>

@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import JournalEntry
+from .models import JournalEntry, Tag
 from .forms import JournalEntryForm
 
 def entry_list(request):
@@ -41,7 +41,19 @@ def entry_delete(request, pk):
 def search_by_date(request):
     if 'date' in request.GET:
         date_str = request.GET['date']
-        entries = JournalEntry.objects.filter(date__date=date_str)
+        entries = JournalEntry.objects.filter(date=date_str)
+    else:
+        entries = JournalEntry.objects.none()
+    return render(request, 'journal/entry_list.html', {'entries': entries})
+
+def search_by_tag(request):
+    if 'tag' in request.GET:
+        tag_name = request.GET['tag']
+        tag = Tag.objects.filter(name=tag_name).first()
+        if tag:
+            entries = JournalEntry.objects.filter(tags=tag)
+        else:
+            entries = JournalEntry.objects.none()
     else:
         entries = JournalEntry.objects.none()
     return render(request, 'journal/entry_list.html', {'entries': entries})
