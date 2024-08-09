@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import JournalEntry, Tag
+from .models import JournalEntry, Tag, Location
 from .forms import JournalEntryForm
 
 def entry_list(request):
