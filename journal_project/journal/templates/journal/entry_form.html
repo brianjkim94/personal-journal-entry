@@ -1,13 +1,21 @@
 <!DOCTYPE html>
 <html>
-<head><title>New Entry</title></head>
+<head>
+    <title>New Entry</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+</head>
 <body>
-    <h1>New Journal Entry</h1>
+    <header>
+        <h1>New Journal Entry</h1>
+    </header>
+    <div class="container">
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
         <button type="submit">Save</button>
     </form>
     <a href="{% url 'entry_list' %}">Back to List</a>
+    </div>
 </body>
 </html>

@@ -1,6 +1,8 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import JournalEntry, Tag, Location
-from .forms import JournalEntryForm
+from django.contrib.auth import login as auth_login, authenticate
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from .models import JournalEntry, Tag
+from .forms import JournalEntryForm, SignUpForm, LoginForm
 
 def entry_list(request):
     entries = JournalEntry.objects.all()
@@ -57,3 +59,29 @@ def search_by_tag(request):
     else:
         entries = JournalEntry.objects.none()
     return render(request, 'journal/entry_list.html', {'entries': entries})
+
+def signup(request):
+    if request.method == 'POST':
+        form = SignUpForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password1')
+            user = authenticate(username=username, password=password)
+            if user is not None:
+                auth_login(request, user)
+                return redirect('entry_list')  # Redirect to home or any other page
+    else:
+        form = SignUpForm()
+    return render(request, 'registration/signup.html', {'form': form})
+
+def login_view(request):
+    if request.method == 'POST':
+        form = LoginForm(request, data=request.POST)
+        if form.is_valid():
+            user = form.get_user()
+            auth_login(request, user)
+            return redirect('entry_list')  # Redirect to home or any other page
+    else:
+        form = LoginForm()
+    return render(request, 'registration/login.html', {'form': form})

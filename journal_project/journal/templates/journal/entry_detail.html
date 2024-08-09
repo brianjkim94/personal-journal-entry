@@ -1,24 +1,34 @@
 <!DOCTYPE html>
 <html>
-<head><title>Journal Entry Detail</title></head>
+<head>
+    <title>Journal Entry Detail</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+</head>
 <body>
-    <h1>{{ entry.title }}</h1>
-    <p><strong>Date:</strong> {{ entry.date }}</p>
-    <p>{{ entry.content }}</p>
-    <p><strong>Tags:</strong> 
-        {% if entry.tags.all %}
-            {% for tag in entry.tags.all %}
-                {{ tag.name }}{% if not forloop.last %}, {% endif %}
-            {% endfor %}
-        {% else %}
-            No tags
-        {% endif %}
-    </p>
-    <a href="{% url 'entry_edit' entry.pk %}">Edit</a>
-    <form method="post" action="{% url 'entry_delete' entry.pk %}">
-        {% csrf_token %}
-        <button type="submit">Delete</button>
-    </form>
-    <a href="{% url 'entry_list' %}">Back to List</a>
+    <header>
+        <h1>Journal Entry Detail</h1>
+    </header>
+    <div class="container">
+        <h1>{{ entry.title }}</h1>
+        <p><strong>Date:</strong> {{ entry.date }}</p>
+        <p>{{ entry.content }}</p>
+        <p><strong>Tags:</strong> 
+            {% if entry.tags.all %}
+                {% for tag in entry.tags.all %}
+                    {{ tag.name }}{% if not forloop.last %}, {% endif %}
+                {% endfor %}
+            {% else %}
+                No tags
+            {% endif %}
+        </p>
+        <p><strong>Location:</strong> {{ entry.location.address }}</p>
+        <a href="{% url 'entry_edit' entry.pk %}" class="button">Edit</a>
+        <form method="post" action="{% url 'entry_delete' entry.pk %}" style="display: inline;">
+            {% csrf_token %}
+            <button type="submit" class="button">Delete</button>
+        </form>
+        <a href="{% url 'entry_list' %}" class="button">Back to List</a>
+    </div>
 </body>
 </html>

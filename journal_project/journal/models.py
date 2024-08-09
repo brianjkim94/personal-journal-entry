@@ -17,7 +17,7 @@ class JournalEntry(models.Model):
     content = models.TextField()
     date = models.DateField()
     tags = models.ManyToManyField(Tag, blank=True)
-    location = models.CharField(max_length=255, blank=True, null=True) 
+    location = models.CharField(max_length=255, blank=True, null=True)  # Free text input field
 
     def __str__(self):
         return self.title

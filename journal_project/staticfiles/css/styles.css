@@ -1,0 +1,45 @@
+body {
+    background-color: #6B8E23; 
+    color: #fff;
+    font-family: Arial, sans-serif;
+}
+
+header {
+    background-color: #3E2723; 
+    color: #fff;
+    padding: 10px;
+    text-align: center;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+.container {
+    padding: 20px;
+    margin: auto;
+    max-width: 800px;
+}
+
+form {
+    margin: 20px 0;
+}
+
+input[type="text"], input[type="date"], textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+}
+
+button {
+    background-color: #3E2723; /* Dark brown */
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #5d4037; /* Slightly lighter brown */
+}
