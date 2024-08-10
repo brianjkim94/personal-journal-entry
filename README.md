@@ -2,14 +2,14 @@
 
 Digital Journal is an app that allows you to manage your journal entries or notes digitally. You can add a new entry with a title, content, date, tags and location. You can search for your entries by date or tag and also either edit or delete your saved entries. 
 
-![Alt Text](./journal_project/images/Screenshot%202024-08-09%20at%208.57.33 PM.png)
+![Alt Text](./images/Screenshot%202024-08-09%20at%208.57.33 PM.png)
 
 # How it Works
 
 User can sign up and start creating his or her journal entries with Digital Journal App. User can create, read, update and delete his or her personal journal entries. 
 User can write add title, content, date and location when writing a new journal entry. Also the user can edit any of those attributes when updating the saved journal entry. 
 
-![Alt Text](./journal_project/images/Screenshot%202024-08-09%20at%209.37.06 PM.png)
+![Alt Text](./images/Screenshot%202024-08-09%20at%209.37.06 PM.png)
 
 ```py
 from django import forms
