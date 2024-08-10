@@ -50,7 +50,7 @@ class LoginForm(AuthenticationForm):
 
 ## Links
 
-[https://digital-journal-app.com]()
+[https://journal-project-6n06.onrender.com]()
 [https://github.com/brianjkim94/personal-journal-entry]()
 
 
