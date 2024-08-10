@@ -29,10 +29,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-y0s37ybr*$2h0jugah%$e(+4&-dc8d$kwb&ib^k8s@2$ggfoho'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
 
 ALLOWED_HOSTS = [
     '',
@@ -88,14 +86,11 @@ WSGI_APPLICATION = 'journal_project.wsgi.application'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
 DATABASES = {
-  'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'journal_db',
-        'USER': 'briankim',
-        'PASSWORD': '123123',
-        'HOST': 'localhost',
-        'PORT': '5432',
-    }
+    'default': dj_database_url.config(
+        # Replace this value with your local database's connection string.
+        default=DATABASE_URL,
+        conn_max_age=600
+    )
 }
 
 
