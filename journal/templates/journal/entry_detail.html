@@ -22,7 +22,7 @@
                 No tags
             {% endif %}
         </p>
-        <p><strong>Location:</strong> {{ entry.location.address }}</p>
+        <p><strong>Location:</strong> {{ entry.location }}</p>
         <a href="{% url 'entry_edit' entry.pk %}" class="button">Edit</a>
         <form method="post" action="{% url 'entry_delete' entry.pk %}" style="display: inline;">
             {% csrf_token %}

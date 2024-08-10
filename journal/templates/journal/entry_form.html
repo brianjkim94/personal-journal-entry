@@ -1,21 +1,26 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>New Entry</title>
+    <title>Journal Entry Form</title>
     {% load static %}
     <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
 </head>
 <body>
     <header>
-        <h1>New Journal Entry</h1>
+        <h1>Digital Journal</h1>
+        <nav>
+            <a href="{% url 'signup' %}">Sign Up</a> |
+            <a href="{% url 'login' %}">Login</a> |
+            <a href="{% url 'logout' %}">Logout</a>
+        </nav>
     </header>
     <div class="container">
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Save</button>
-    </form>
-    <a href="{% url 'entry_list' %}">Back to List</a>
+        <form method="post" action="{% url 'entry_create' %}">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Save Entry</button>
+        </form>
+        <a href="{% url 'entry_list' %}" class="button">Back to List</a>
     </div>
 </body>
 </html>

@@ -4,14 +4,35 @@ from django.contrib.auth.models import User
 from .models import JournalEntry, Tag
 
 class JournalEntryForm(forms.ModelForm):
+    tags = forms.CharField(
+        max_length=255,
+        required=False,
+        widget=forms.TextInput(attrs={'placeholder': 'Enter tags (comma-separated)'}),
+    )
+
     class Meta:
         model = JournalEntry
         fields = ['title', 'content', 'date', 'tags', 'location']
         widgets = {
             'date': forms.DateInput(attrs={'type': 'date'}),
-            'tags': forms.CheckboxSelectMultiple(),
-            'location': forms.TextInput(attrs={'placeholder': 'Enter location'}),  # Free text input
+            'location': forms.TextInput(attrs={'placeholder': 'Enter location'}),
         }
+
+    def clean_tags(self):
+        tags = self.cleaned_data.get('tags', '')
+        return tags
+
+    def save(self, commit=True):
+        instance = super().save(commit=False)
+        tags = self.cleaned_data.get('tags', '')
+        if commit:
+            instance.save()
+            tag_names = [tag.strip() for tag in tags.split(',') if tag.strip()]
+            for tag_name in tag_names:
+                tag, created = Tag.objects.get_or_create(name=tag_name)
+                instance.tags.add(tag)
+            instance.save()
+        return instance
 
 class SignUpForm(UserCreationForm):
     email = forms.EmailField(required=True)
