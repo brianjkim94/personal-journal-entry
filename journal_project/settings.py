@@ -37,6 +37,7 @@ ALLOWED_HOSTS = [
     'https://journal-project-6n06.onrender.com/'
 ]
 
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 
 # Application definition
 
