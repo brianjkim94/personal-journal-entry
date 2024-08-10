@@ -34,7 +34,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 ALLOWED_HOSTS = [
     'journal-project-6n06.onrender.com/',
-    'https://journal-project-6n06.onrender.com/'
 ]
 
 
