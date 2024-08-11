@@ -24,13 +24,14 @@ class JournalEntryForm(forms.ModelForm):
 
     def save(self, commit=True):
         instance = super().save(commit=False)
-        tags = self.cleaned_data.get('tags', '')
         if commit:
             instance.save()
-            tag_names = [tag.strip() for tag in tags.split(',') if tag.strip()]
-            for tag_name in tag_names:
-                tag, created = Tag.objects.get_or_create(name=tag_name)
-                instance.tags.add(tag)
+        tags = self.cleaned_data.get('tags', '')
+        tag_names = [tag.strip() for tag in tags.split(',') if tag.strip()]
+        for tag_name in tag_names:
+            tag, created = Tag.objects.get_or_create(name=tag_name)
+            instance.tags.add(tag)
+        if commit:
             instance.save()
         return instance
 

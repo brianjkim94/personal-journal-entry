@@ -17,11 +17,6 @@ def entry_create(request):
         form = JournalEntryForm(request.POST)
         if form.is_valid():
             entry = form.save()
-            # Process tags from free text input
-            tag_names = form.cleaned_data['tags'].split(',')  # Assuming comma-separated input
-            for tag_name in tag_names:
-                tag, created = Tag.objects.get_or_create(name=tag_name.strip())
-                entry.tags.add(tag)
             return redirect('entry_list')
     else:
         form = JournalEntryForm()
@@ -35,7 +30,7 @@ def entry_edit(request, pk):
             entry = form.save()
             # Process tags from free text input
             tag_names = form.cleaned_data['tags'].split(',')  # Assuming comma-separated input
-            entry.tags.clear()
+            entry.tags.clear()  # Clear existing tags
             for tag_name in tag_names:
                 tag, created = Tag.objects.get_or_create(name=tag_name.strip())
                 entry.tags.add(tag)
